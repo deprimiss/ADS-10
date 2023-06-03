@@ -24,15 +24,15 @@ class Tree {
         }
     }
     void createallperms(Node* rt, std::vector<char> v) {
+        if (!(rt->ch == ' ')) {
+            v.push_back(rt->ch);
+        }
         if (!rt->vct.empty()) {
             for (Node* next : rt->vct) {
                 createallperms(next, v);
             }
         } else {
             allpms.push_back(v);
-        }
-        if (!(rt->ch == ' ')) {
-            v.push_back(rt->ch);
         }
     }
 
