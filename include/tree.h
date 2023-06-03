@@ -4,48 +4,48 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
 class Tree {
-private:
+ private:
     struct Node {
-        std::vector<Node*> vct;
         char ch;
+        std::vector<Node*> vec;
     };
-    Node* rt;
-    std::vector<std::vector<char>> allpms;
+    Node* root;
+    std::vector<std::vector<char>> allperms;
+    void createallperms(Node* root, std::vector<char> v) {
+        if (!(root->ch == ' ')) {
+            v.push_back(root->ch);
+        }
+        if (!root->vec.empty()) {
+            for (Node* next : root->vec) {
+                createallperms(next, v);
+            }
+        } else {
+            allperms.push_back(v);
+        }
+    }
     void create(Node* root, const std::vector<char>& in) {
         for (char ch : in) {
             Node* temp = new Node;
             temp->ch = ch;
-            root->vct.push_back(temp);
-            std::vector<char> ost = in;
-            ost.erase(std::find(ost.begin(), ost.end(), ch));
-            create(temp, ost);
-        }
-    }
-    void createallperms(Node* rt, std::vector<char> v) {
-        if (!rt->vct.empty()) {
-            for (Node* next : rt->vct) {
-                createallperms(next, v);
-            }
-        }
-        else {
-            allpms.push_back(v);
-        }
-        if (!(rt->ch == ' ')) {
-            v.push_back(rt->ch);
+            root->vec.push_back(temp);
+            std::vector<char> ostatok = in;
+            ostatok.erase(std::find(ostatok.begin(), ostatok.end(), ch));
+            create(temp, ostatok);
         }
     }
 
-public:
-    std::vector<std::vector<char>> getAllPerms() const {
-        return allpms;
-    }
+ public:
     explicit Tree(std::vector<char> in) {
-        rt = new Node;
-        rt->ch = ' ';
-        create(rt, in);
+        root = new Node;
+        root->ch = ' ';
+        create(root, in);
         std::vector<char> v;
-        createallperms(rt, v);
+        createallperms(root, v);
+    }
+    std::vector<std::vector<char>> getAllPerms() const {
+        return allperms;
     }
 };
 #endif  // INCLUDE_TREE_H_
