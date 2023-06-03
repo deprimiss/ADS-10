@@ -4,32 +4,32 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
 class Tree {
 private:
     struct Node {
-        std::vector<Node*> vctr;
+        std::vector<Node*> vct;
         char ch;
     };
     Node* rt;
-    std::vector<std::vector<char>> allprms;
-    void create(Node* rt, const std::vector<char>& in) {
+    std::vector<std::vector<char>> allpms;
+    void create(Node* root, const std::vector<char>& in) {
         for (char ch : in) {
-            Node* tmp = new Node;
-            tmp->ch = ch;
-            rt->vctr.push_back(tmp);
+            Node* temp = new Node;
+            temp->ch = ch;
+            root->vct.push_back(temp);
             std::vector<char> ost = in;
             ost.erase(std::find(ost.begin(), ost.end(), ch));
-            create(tmp, ost);
+            create(temp, ost);
         }
     }
     void createallperms(Node* rt, std::vector<char> v) {
-        if (!rt->vctr.empty()) {
-            for (Node* next : rt->vctr) {
+        if (!rt->vct.empty()) {
+            for (Node* next : rt->vct) {
                 createallperms(next, v);
             }
-        } else {
-            allprms.push_back(v);
+        }
+        else {
+            allpms.push_back(v);
         }
         if (!(rt->ch == ' ')) {
             v.push_back(rt->ch);
@@ -38,7 +38,7 @@ private:
 
 public:
     std::vector<std::vector<char>> getAllPerms() const {
-        return allprms;
+        return allpms;
     }
     explicit Tree(std::vector<char> in) {
         rt = new Node;
