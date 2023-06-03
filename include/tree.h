@@ -28,8 +28,7 @@ private:
             for (Node* next : rt->vctr) {
                 createallperms(next, v);
             }
-        }
-        else {
+        } else {
             allprms.push_back(v);
         }
         if (!(rt->ch == ' ')) {
