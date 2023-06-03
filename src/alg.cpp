@@ -6,5 +6,9 @@
 #include  "tree.h"
 
 std::vector<char> getPerm(const Tree& tree, int n) {
-  // напишите реализацию
+    std::vector<std::vector<char>> allprms = tree.getAllPerms();
+    if (!(n > allprms.size())) {
+        return allprms[--n];
+    }
+    return {};
 }
