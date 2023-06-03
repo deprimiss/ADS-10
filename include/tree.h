@@ -6,7 +6,7 @@
 #include <algorithm>
 
 class Tree {
-private:
+ private:
     struct Node {
         std::vector<Node*> vct;
         char ch;
@@ -24,20 +24,19 @@ private:
         }
     }
     void createallperms(Node* rt, std::vector<char> v) {
-        if (!(rt->ch == ' ')) {
-            v.push_back(rt->ch);
-        }
         if (!rt->vct.empty()) {
             for (Node* next : rt->vct) {
                 createallperms(next, v);
             }
-        }
-        else {
+        } else {
             allpms.push_back(v);
+        }
+        if (!(rt->ch == ' ')) {
+            v.push_back(rt->ch);
         }
     }
 
-public:
+ public:
     std::vector<std::vector<char>> getAllPerms() const {
         return allpms;
     }
