@@ -45,8 +45,8 @@ public:
         root = new Node;
         root->ch = ' ';
         create(root, v);
-        std::vector<char> v;
-        createallperms(root, v);
+        std::vector<char> n;
+        createallperms(root, n);
     }
 };
 #endif  // INCLUDE_TREE_H_
