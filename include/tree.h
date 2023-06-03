@@ -43,8 +43,8 @@ public:
     explicit Tree(std::vector<char> in) {
         rt = new Node;
         rt->ch = ' ';
-        std::vector<char> v;
         create(rt, in);
+        std::vector<char> v;
         createallperms(rt, v);
     }
 };
